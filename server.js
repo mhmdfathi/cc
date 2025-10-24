@@ -48,13 +48,14 @@ app.post("/send-code", async (req, res) => {
   const randomCode = Math.floor(10000 + Math.random() * 90000);
   codes[email] = randomCode;
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "fathy.01095739893@gmail.com", // غيّر الإيميل
-      pass: "wlct csug kosc nawg",          // كلمة مرور التطبيق
-    },
-  });
+ const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
 
   const mailOptions = {
     from: "fathy.01095739893@gmail.com",
