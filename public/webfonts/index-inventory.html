@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style-inventory.css" />
+    <title>Inventory Management</title>
+  </head>
+  <body>
+    <!-- <nav>
+      <div class="logo-name">Inventar</div>
+      <div class="seting"><i class="fa-solid fa-gear"></i></div>
+    </nav> -->
+
+    <div class="con">
+      <div class="site-bar">
+        <button onclick="dashboardMood()" class="btn-site-bar dashbaord active">
+          <img src="img/dash.svg" alt="" />
+          <!-- <span>Dashboard</span> -->
+        </button>
+        <button onclick="productsMood()" class="btn-site-bar products">
+          <i class="icon-ive fa-solid fa-plus"></i>
+          <!-- <span>products</span> -->
+        </button>
+      </div>
+      <div class="page dash-page active">
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="col-dash-page col-sash-one">
+              <div class="total-name">
+                Total Items
+                <img src="img/broduct.svg" alt="" />
+              </div>
+              <div class="info">
+                <div class="count-dash count-total-dash">210</div>
+                <div class="count-items-dash info-col-dash-count">6 products</div>
+              </div>
+            </div>
+          </div>
+          <div onclick="openLowInStockCon()" class="col-md-3">
+            <div class="col-dash-page low-in-stock-btn col-sash-two">
+              <div class="total-name">
+                Low Stock Alerts
+                <img src="img/error.svg" alt="" />
+              </div>
+              <div class="info">
+                <div class="count-dash count-low-stock-dash">2</div>
+                <div class="info-col-dash-count">Items need restocking</div>
+              </div>
+            </div>
+          </div>
+          <div onclick="openOutInStockCon()" class="col-md-3">
+            <div class="col-dash-page out-in-stock-btn col-sash-three">
+              <div class="total-name">
+                Out of Stock
+                <img src="img/out.svg" alt="" />
+              </div>
+              <div class="info">
+                <div class="count-dash count-Out-stock-dash">1</div>
+                <div class="info-col-dash-count">Products unavailable</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="col-dash-page col-sash-four">
+              <div class="total-name">
+                Total Value
+                <img src="img/dolar.svg" alt="" />
+              </div>
+              <div class="info">
+                <div class="count-dash count-Total Value-dash">$6,385.22</div>
+                <div class="info-col-dash-count">Inventory worth</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-dash">
+          <div class="con-product-page-fix">
+            <div class="table-name">Inventory Items</div>
+
+            <div class="search-con">
+              <img src="img/search.svg" alt="" />
+              <input
+                onkeyup="search(value)"
+                type="text"
+                placeholder="search for products"
+              />
+            </div>
+          </div>
+
+          <table class="table-product">
+            <tr class="tr-fixed">
+              <th>id</th>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Quantity</th>
+              <th>Min Stock</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Last Updated</th>
+            </tr>
+            <tbody class="inner-dash"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="page dash-page product-page">
+        <div class="addProductBtns">
+          <span onclick="closeAddProductBtns()" class="close-addProductBtns"
+            ><i class="fa-solid fa-xmark"></i
+          ></span>
+          <div class="new-product-name">New product</div>
+          <div class="new-product-btns">
+            <label for="">inter product name</label>
+            <input id="name-input" type="text" placeholder="Name" />
+            <label for=""> Category </label>
+            <input id="Category" type="text" placeholder="Category" />
+            <label for="">Cost</label>
+
+            <div class="Cost">
+              <input id="Cost-input" type="number" />
+            </div>
+            <label for="">percentage</label>
+
+            <div class="percentage">
+              <input
+                onkeyup="Calculate()"
+                id="percentage-input"
+                type="number"
+              />
+            </div>
+            <label for="">selling price</label>
+
+            <div class="selling-price">
+              <input
+                onkeyup="Calculate()"
+                id="selling-price-input"
+                type="number"
+              />
+            </div>
+
+            <div class="qun-main-stock">
+              <table>
+                <tr>
+                  <th class="th-pro"><label for="">qun </label></th>
+                  <th class="th-pro"><label for="">min stock </label></th>
+                </tr>
+                <tbody class="table-qun-add-product">
+                  <tr>
+                    <td>
+                      <input id="qun" type="number" />
+                    </td>
+                    <td>
+                      <input id="main-stock" type="number" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="safe-or-close">
+            <button onclick="closeAddProductBtns()">close</button>
+            <button onclick="saveProduct()" id="save">save</button>
+          </div>
+        </div>
+
+        <div class="table-dash">
+          <div class="con-product-page-fix">
+            <button onclick="openAddProductBtns()" class="add-product">
+              Add Product
+            </button>
+            <div class="table-name">Inventory Items</div>
+            <div class="search-con">
+              <img src="img/search.svg" alt="" />
+              <input
+                onkeyup="search(value)"
+                type="text"
+                placeholder="search for products"
+              />
+            </div>
+          </div>
+
+          <table class="table-product">
+            <tr class="tr-fixed">
+              <th>id</th>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Quantity</th>
+              <th>Min Stock</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Last Updated</th>
+              <th>Edite</th>
+              <th>Delete</th>
+            </tr>
+            <tbody class="inner-product"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert-con">
+      <div class="alert-message">
+        <h4>Are you sure?</h4>
+        <p>
+          This action cannot be undone. This will permanently delete the item
+          from your inventory.
+        </p>
+        <div class="btns-yes-or-no">
+          <button class="yes-delete">Delete</button>
+          <button class="no-cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sucsess-mass"></div>
+
+    <div class="out-in-stock-con">
+      <div class="out-in-stock-content">
+        <span onclick="closeOutInStockCon()" class="close-addProductBtns"
+          ><i class="fa-solid fa-xmark"></i
+        ></span>
+        <div class="con-fix">
+          <div class="out-in-stock-name">Out in stock</div>
+        </div>
+        <table class="out-in-stock-table">
+          <tr class="tr-fixed tr-fixed-out-in-stock">
+            <th>id</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Min Stock</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Last Updated</th>
+          </tr>
+          <tbody class="inner-out-in-stock"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="low-in-stock-con">
+      <div class="low-in-stock-content">
+        <span onclick="closeLowInStockCon()" class="close-addProductBtns"
+          ><i class="fa-solid fa-xmark"></i
+        ></span>
+        <div class="con-fix">
+          <div class="low-in-stock-name">low stock</div>
+        </div>
+        <table class="low-in-stock-table">
+          <tr class="tr-fixed tr-fixed-low-in-stock">
+            <th>id</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Min Stock</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Last Updated</th>
+          </tr>
+          <tbody class="inner-low-in-stock"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main-inventory.js"></script>
+  </body>
+</html>
