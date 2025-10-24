@@ -134,3 +134,27 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+
+app.get("/test-email", async (req, res) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: "fathy.01095739893@gmail.com",
+      subject: "اختبار إرسال من Railway",
+      text: "الرسالة دي اختبار من السيرفر",
+    });
+
+    res.send("✅ تم إرسال الإيميل بنجاح!");
+  } catch (err) {
+    console.error("Test email error:", err);
+    res.send("❌ فشل في الإرسال: " + err.message);
+  }
+});
